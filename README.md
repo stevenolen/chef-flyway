@@ -1,6 +1,6 @@
 # flyway-cookbook
 
-TODO: Enter the cookbook description here.
+Configures `n` instances of flyway on a particular node to perform migrations.
 
 ## Supported Platforms
 
@@ -8,33 +8,18 @@ TODO: List your supported platforms.
 
 ## Attributes
 
-<table>
-  <tr>
-    <th>Key</th>
-    <th>Type</th>
-    <th>Description</th>
-    <th>Default</th>
-  </tr>
-  <tr>
-    <td><tt>['flyway']['bacon']</tt></td>
-    <td>Boolean</td>
-    <td>whether to include bacon</td>
-    <td><tt>true</tt></td>
-  </tr>
-</table>
-
 ## Usage
 
-### flyway::default
+### flyway
 
-Include `flyway` in your node's `run_list`:
+```ruby
+flyway 'default' do
+  url 'jdbc:mysql://localhost:3306/default'
+  user 'defaultuser'
+  password 'defaultpassword'
+  #TODO: figure out how to handle placeholders
+end
 
-```json
-{
-  "run_list": [
-    "recipe[flyway::default]"
-  ]
-}
 ```
 
 ## License and Authors

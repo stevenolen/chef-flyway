@@ -1,15 +1,16 @@
 ---
 driver:
-  name: vagrant
+  name: docker
+driver_config:
+  require_chef_omnibus: true
+  use_sudo: false
 
 provisioner:
-  name: chef_solo
+  name: chef_zero
 
 platforms:
-  - name: ubuntu-12.04
-  - name: centos-6.4
+  - name: ubuntu-14.04
 
 suites:
   - name: default
-    run_list:
-    attributes:
+    run_list: ['flyway_test::default']
