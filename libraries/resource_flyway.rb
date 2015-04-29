@@ -4,7 +4,7 @@ class Chef
   class Resource
     class Flyway < Chef::Resource::LWRPBase
       self.resource_name = :flyway
-      actions :create, :delete
+      actions :create, :migrate, :delete
       default_action :create
 
       attribute :instance, kind_of: String, name_attribute: true
@@ -13,6 +13,7 @@ class Chef
       attribute :password, kind_of: String, required: true
       attribute :path, kind_of: String, default: nil
       attribute :version, kind_of: String, default: '3.2.1'
+      attribute :migrations, kind_of: String, default: nil
       # custom_download_url? might be odd since zip/targz and version attribute above
       # location to java?
     end
