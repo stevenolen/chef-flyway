@@ -7,6 +7,22 @@ describe 'flyway_test::default' do
   end
 
   context 'compiling the test recipe' do
+    it 'installs java' do
+      expect(chef_run).to install_apt_package('openjdk-7-jre-headless')
+    end
+
+    it 'sets up mysql service' do
+      expect(chef_run).to create_mysql_service('default')
+    end
+
+    it 'hack starts mysql service' do
+      expect(chef_run).to run_execute('hack-start mysql on debian in docker')
+    end
+
+    it 'adds test db info' do
+      expect(chef_run).to run_execute('add test db info')
+    end
+
     it 'creates flyway[default]' do
       expect(chef_run).to create_flyway('default')
     end
@@ -19,13 +35,13 @@ describe 'flyway_test::default' do
 
     # this is broken, fix cache_path nonsense!
     it 'downloads flyway' do
-      expect(chef_run).to create_remote_file('download flyway tar')
+      expect(chef_run).to create_remote_file('default: download flyway tar')
     end
 
     it 'extracts flyway tar' do
       expect(chef_run).to_not run_bash('default: extract flyway tar')
-      # extract_action = chef_run.bash('default: extract flyway tar')
-      # expect(extract_action).to subscribe_to('remote_file[default: download flyway tar]').on(:run).immediately
+      extract_action = chef_run.bash('default: extract flyway tar')
+      expect(extract_action).to subscribe_to('remote_file[default: download flyway tar]').on(:run).immediately
     end
 
     it 'creates flyway conf' do

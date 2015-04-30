@@ -1,5 +1,5 @@
 CREATE TABLE test_data (
- value VARCHAR(25) NOT NULL,
+ id int(10) NOT NULL AUTO_INCREMENT,
  sample TEXT,
- PRIMARY KEY(value)
+ PRIMARY KEY(id)
 );
