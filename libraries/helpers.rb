@@ -8,14 +8,14 @@ module FlywayCookbook
     end
 
     def flyway_migrate_cmd
-      @flyway_bin = new_resource.path || "/opt/flyway-#{new_resource.name}/"
+      @flyway_bin = new_resource.path || "/opt/flyway-#{new_resource.instance}/"
       @flyway_bin += '/flyway'
       @cmd = @flyway_bin + ' migrate'
       @cmd
     end
 
     def flyway_validate_cmd
-      @flyway_bin = new_resource.path || "/opt/flyway-#{new_resource.name}/"
+      @flyway_bin = new_resource.path || "/opt/flyway-#{new_resource.instance}/"
       @flyway_bin += '/flyway'
       @cmd = @flyway_bin + ' validate'
       @cmd
