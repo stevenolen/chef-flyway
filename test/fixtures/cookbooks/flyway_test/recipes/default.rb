@@ -17,8 +17,8 @@ end
 
 # Debian/Ubuntu with kitchen-docker do not support upstart, so just manually start for testing purposes!
 execute 'hack-start mysql on debian in docker' do
- command '/usr/sbin/mysqld --defaults-file=/etc/mysql-default/my.cnf > /dev/null 2>&1 &'  
- only_if { node[:platform_family] == 'debian' }
+  command '/usr/sbin/mysqld --defaults-file=/etc/mysql-default/my.cnf > /dev/null 2>&1 &'
+  only_if { node[:platform_family] == 'debian' }
 end
 
 # create a db & user/password to use below.
