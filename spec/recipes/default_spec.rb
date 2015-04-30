@@ -33,7 +33,6 @@ describe 'flyway_test::default' do
       expect(chef_run).to create_directory('/opt/flyway-default/')
     end
 
-    # this is broken, fix cache_path nonsense!
     it 'downloads flyway' do
       expect(chef_run).to create_remote_file('default: download flyway tar')
     end
