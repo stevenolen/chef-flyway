@@ -3,3 +3,7 @@
 flyway.url=<%= @resource.url %>
 flyway.user=<%= @resource.user %>
 flyway.password=<%= @resource.password %>
+
+<% @resource.additional_options.each do |k,v| %>
+flyway.<%= k -%>=<%= v %>
+<% end -%>

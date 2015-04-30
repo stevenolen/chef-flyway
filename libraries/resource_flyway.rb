@@ -14,6 +14,7 @@ class Chef
       attribute :path, kind_of: String, default: nil
       attribute :version, kind_of: String, default: '3.2.1'
       attribute :migrations, kind_of: String, default: nil
+      attribute :additional_options, kind_of: Hash, default: nil
       # custom_download_url? might be odd since zip/targz and version attribute above
       # location to java?
     end

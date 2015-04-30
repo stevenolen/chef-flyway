@@ -1,0 +1,1 @@
+INSERT INTO test_data (sample) VALUES ('A sample text seed.');
