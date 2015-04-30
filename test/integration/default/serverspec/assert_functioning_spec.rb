@@ -17,3 +17,7 @@ end
 describe command('/opt/flyway-default/flyway validate') do
   its(:stdout) { should match(/Validated 2 migrations/) }
 end
+
+describe command('mysql -h 127.0.0.1 -uroot -pchangeme -N -B testdb -e "select * from test_data;"') do
+  its(:stdout) { should match(/1\tA sample text seed.\n2\ta_here\n3\tb_here/) }
+end
