@@ -1,6 +1,7 @@
 # need to set up java and mysql so we can actually do integration testing!
 case node['platform_family']
 when 'debian'
+  include_recipe 'apt'
   package 'openjdk-7-jre-headless'
 when 'rhel'
   package 'java-1.7.0-openjdk'
@@ -23,7 +24,7 @@ end
 
 # create a db & user/password to use below.
 execute 'add test db info' do
-  command "sleep 5s; /usr/bin/mysql -h 127.0.0.1 -uroot -pchangeme -e \"CREATE DATABASE testdb; GRANT ALL ON testdb.* to 'testuser' identified by 'testpassword';\""
+  command "sleep 5s; /usr/bin/mysql -h 127.0.0.1 -uroot -pchangeme -e \"CREATE DATABASE if not exists testdb; GRANT ALL ON testdb.* to 'testuser' identified by 'testpassword'; CREATE DATABASE if not exists testdb2; GRANT ALL ON testdb2.* to 'testuser' identified by 'testpassword';\""
 end
 
 #### Actual flyway migration definition ####
@@ -37,4 +38,16 @@ flyway 'default' do
     'placeholders.b' => 'b_here'
   )
   action [:create, :migrate]
+end
+
+#### Flyway with no migrations ####
+flyway 'default2' do
+  url 'jdbc:mysql://127.0.0.1:3306/testdb2'
+  user 'testuser'
+  password 'testpassword'
+  additional_options(
+    'placeholders.a' => 'a_here',
+    'placeholders.b' => 'b_here'
+  )
+  action [:create]
 end
